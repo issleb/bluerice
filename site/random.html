@@ -1,14 +1,7 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8" />
-    <title>Blue Rice</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://unpkg.com/react@15.3.2/dist/react.js"></script>
-    <script src="https://unpkg.com/react-dom@15.3.2/dist/react-dom.js"></script>
-    <script src="https://unpkg.com/babel-core@5.8.38/browser.min.js"></script>
-  </head>
-  <body>
+---
+layout: react
+---
+
     <div id="strip"></div>
     <script type="text/babel">
 
@@ -40,9 +33,12 @@
       });
 
       ReactDOM.render(
-              <RandomStrip source="http://localhost:3000/strips/random" />,
-              document.getElementById('strip')
+        {% if jekyll.environment == "production" %}
+          <RandomStrip source="http://node-express-env.ic4usvjtps.us-west-2.elasticbeanstalk.com/strips/random" />,
+        {% else %}
+          <RandomStrip source="http://localhost:3000/strips/random" />,
+        {% endif %}
+
+        document.getElementById('strip')
       );
     </script>
-  </body>
-</html>

@@ -1,7 +1,8 @@
 var express = require('express');
 var router = express.Router();
 
-const stripMax = 75;
+const stripMax = 281;
+const newStripMax = 16;
 const stripBase = 'https://s3-us-west-2.amazonaws.com/bluerice/';
 
 function getRandomInt(min, max) {
@@ -13,10 +14,18 @@ router.get('/', function(req, res, next) {
   res.send('respond with a resource');
 });
 
-/* GET /todos listing. */
+/* GET /random listing. */
 router.get('/random', function(req, res, next) {
-  var stripNum = getRandomInt(1, 75);
-  var stripUrl = stripBase + 'BR' + stripNum + '.gif';
+  var stripNum = getRandomInt(1, stripMax);
+  var stripUrl = stripBase + stripNum + '.gif';
+
+  res.json(stripUrl);
+});
+
+/* GET /random/new listing. */
+router.get('/random/new', function(req, res, next) {
+  var stripNum = getRandomInt(1, newStripMax);
+  var stripUrl = stripBase + 'N' + stripNum + '.gif';
 
   res.json(stripUrl);
 });
