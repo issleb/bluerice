@@ -3,7 +3,7 @@ var router = express.Router();
 
 const stripMax = 281;
 const newStripMax = 16;
-const stripBase = 'https://s3-us-west-2.amazonaws.com/bluerice/';
+const stripBase = 'https://s3-us-west-2.amazonaws.com/bluerice/strips/';
 
 function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
