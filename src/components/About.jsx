@@ -1,6 +1,11 @@
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 export default function About() {
+  useEffect(() => {
+    document.title = 'About - Blue Rice';
+  }, []);
+
   return (
     <div className="about">
       <h2>About Blue Rice</h2>

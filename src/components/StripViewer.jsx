@@ -1,6 +1,6 @@
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import { useRef, useCallback } from 'react';
-import { getStrip, getNext, getPrev, getLast, stripImagePath, isAtBoundary } from '../utils/strips';
+import { useRef, useCallback, useEffect } from 'react';
+import { getStrip, getNext, getPrev, stripImagePath, isAtBoundary } from '../utils/strips';
 import useKeyboardNav from '../hooks/useKeyboardNav';
 import StripNav from './StripNav';
 
@@ -11,6 +11,22 @@ export default function StripViewer() {
   const touchStart = useRef(null);
 
   useKeyboardNav(number);
+
+  useEffect(() => {
+    if (strip) {
+      const label = strip.isNew ? `New Strip ${number.slice(1)}` : `Strip #${number}`;
+      document.title = `${label} - Blue Rice`;
+    }
+    window.scrollTo(0, 0);
+  }, [number, strip]);
+
+  // Preload adjacent strip images
+  useEffect(() => {
+    const next = getNext(number);
+    const prev = getPrev(number);
+    if (next) { const img = new Image(); img.src = stripImagePath(next); }
+    if (prev) { const img = new Image(); img.src = stripImagePath(prev); }
+  }, [number]);
 
   const handleTouchStart = useCallback((e) => {
     touchStart.current = e.touches[0].clientX;
@@ -37,7 +53,7 @@ export default function StripViewer() {
     return (
       <div className="strip-viewer">
         <h2>Strip not found</h2>
-        <Link to="/">Go to latest strip</Link>
+        <Link to="/">Go to archive</Link>
       </div>
     );
   }
@@ -48,12 +64,6 @@ export default function StripViewer() {
 
   return (
     <div className="strip-viewer">
-      {number === getLast() && (
-        <div className="start-link">
-          <Link to="/strip/1">Start from #1 &rarr;</Link>
-        </div>
-      )}
-
       <div className="strip-frame">
         <div
           className="strip-image-container"

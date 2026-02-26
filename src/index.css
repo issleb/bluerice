@@ -6,8 +6,15 @@
 }
 
 /* Base */
-html, body {
-  height: 100%;
+html {
+  background-color: #94c0ff;
+  overflow-x: hidden;
+  scrollbar-color: #7ab0ff #94c0ff;
+}
+
+
+body {
+  min-height: 100%;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   background-color: #94c0ff;
   color: #333;
@@ -28,29 +35,36 @@ img {
   height: auto;
 }
 
-/* App shell */
+/* App shell — single card container */
 .app {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  max-width: 800px;
+  margin: 0 auto;
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  outline: 2px solid #94c0ff;
+  outline-offset: -1px;
 }
 
 .content {
   flex: 1;
-  width: 100%;
-  max-width: 800px;
-  margin: 0 auto;
   padding: 20px;
-  background: white;
 }
 
 /* Header */
 .site-header {
-  background: white;
-  max-width: 800px;
-  margin: 0 auto;
   text-align: center;
-  padding-top: 10px;
+}
+
+/* Footer */
+.site-footer {
+  text-align: center;
+  padding: 16px 20px;
+  color: #888;
+  font-size: 13px;
 }
 
 .logo-link {
@@ -76,6 +90,14 @@ img {
   font-size: 14px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: background 0.15s, color 0.15s;
+}
+
+.main-nav a.active {
+  background: #94c0ff;
+  color: #003;
 }
 
 /* Strip Viewer */
@@ -182,7 +204,8 @@ img {
 }
 
 .strip-number {
-  color: #aaa;
+  color: #666;
+  font-weight: 600;
 }
 
 .strip-date {
@@ -205,7 +228,7 @@ img {
 
 .tag-count {
   color: #666;
-  font-size: 12px;
+  font-size: 0.7em;
 }
 
 /* Archive */
@@ -233,6 +256,45 @@ img {
   color: #003;
 }
 
+/* Strip scroll (archive infinite scroll) */
+.strip-scroll {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-top: 15px;
+}
+
+.scroll-strip {
+  text-align: center;
+}
+
+.scroll-strip-img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+.scroll-strip-meta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.scroll-strip-link {
+  font-weight: 600;
+  color: navy;
+}
+
+.scroll-strip-date {
+  color: #888;
+  font-size: 13px;
+}
+
+/* Thumbnail grid (tag detail pages) */
 .thumbnail-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
@@ -279,10 +341,13 @@ img {
 }
 
 .tag-cloud .tag-pill {
-  display: inline-block;
-  padding: 3px 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 12px;
   background: #e8f0fe;
-  border-radius: 12px;
+  border-radius: 14px;
+  line-height: 1.3;
 }
 
 .tag-cloud .tag-pill:hover {
@@ -338,14 +403,6 @@ img {
   text-decoration: none;
 }
 
-/* Footer */
-.site-footer {
-  text-align: center;
-  padding: 20px;
-  color: #456;
-  font-size: 13px;
-  background: transparent;
-}
 
 /* Responsive */
 @media (max-width: 600px) {
@@ -378,8 +435,8 @@ img {
 
 }
 
-/* Landscape on mobile/tablet: theater mode */
-@media (orientation: landscape) and (max-height: 600px) {
+/* Landscape on mobile/tablet: theater mode (touch devices only) */
+@media (orientation: landscape) and (max-height: 600px) and (pointer: coarse) {
   .site-header,
   .site-footer,
   .strip-tags-line,
@@ -391,13 +448,13 @@ img {
 
   .app {
     min-height: 100vh;
+    max-width: none;
     background: #222;
+    border-radius: 0;
   }
 
   .content {
-    max-width: none;
     padding: 12px;
-    background: #222;
     display: flex;
     align-items: center;
     justify-content: center;

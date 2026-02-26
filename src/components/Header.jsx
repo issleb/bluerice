@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { getRandom } from '../utils/strips';
 
 export default function Header() {
@@ -19,11 +19,11 @@ export default function Header() {
         />
       </Link>
       <nav className="main-nav">
-        <Link to="/archive">Old Strips</Link>
-        <Link to="/archive/new">New Strips</Link>
+        <NavLink to="/archive" end className={({ isActive }) => isActive ? 'active' : ''}>Old</NavLink>
+        <NavLink to="/archive/new" className={({ isActive }) => isActive ? 'active' : ''}>New</NavLink>
         <a href="#" onClick={handleRandom}>Random</a>
-        <Link to="/tags">Tags</Link>
-        <Link to="/about">About</Link>
+        <NavLink to="/tags" className={({ isActive }) => isActive ? 'active' : ''}>Tags</NavLink>
+        <NavLink to="/about" className={({ isActive }) => isActive ? 'active' : ''}>About</NavLink>
       </nav>
     </header>
   );

@@ -1,5 +1,6 @@
+import { useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { getOldStrips, getNewStrips, stripThumbPath } from '../utils/strips';
+import { getOldStrips, getNewStrips, stripImagePath } from '../utils/strips';
 
 export default function Archive() {
   const location = useLocation();
@@ -7,33 +8,38 @@ export default function Archive() {
   const strips = isNew ? getNewStrips() : getOldStrips();
   const title = isNew ? 'New Strips' : 'Old Strips (1999–2002)';
 
+  useEffect(() => {
+    document.title = `${isNew ? 'New Strips' : 'Old Strips'} - Blue Rice`;
+  }, [isNew]);
+
   return (
     <div className="archive">
       <h2>{title}</h2>
 
-      <div className="archive-toggle">
-        <Link to="/archive" className={!isNew ? 'active' : ''}>Old Strips</Link>
-        <Link to="/archive/new" className={isNew ? 'active' : ''}>New Strips</Link>
-      </div>
-
-      <div className="thumbnail-grid">
-        {strips.map(strip => (
-          <Link
-            key={strip.number}
-            to={`/strip/${strip.number}`}
-            className="thumbnail-link"
-          >
-            <img
-              src={stripThumbPath(strip.number)}
-              alt={`Strip ${strip.number}`}
-              className="thumbnail"
-              loading="lazy"
-            />
-            <span className="thumb-label">
-              {strip.isNew ? `N${strip.number.slice(1)}` : `#${strip.number}`}
-            </span>
-          </Link>
-        ))}
+      <div className="strip-scroll">
+        {strips.map(strip => {
+          const label = strip.isNew ? `New #${strip.number.slice(1)}` : `#${strip.number}`;
+          return (
+            <div key={strip.number} className="scroll-strip">
+              <Link to={`/strip/${strip.number}`}>
+                <img
+                  src={stripImagePath(strip.number)}
+                  alt={`Strip ${strip.number}`}
+                  className="scroll-strip-img"
+                  loading="lazy"
+                />
+              </Link>
+              <div className="scroll-strip-meta">
+                <Link to={`/strip/${strip.number}`} className="scroll-strip-link">
+                  {label}
+                </Link>
+                {strip.publishDate && (
+                  <span className="scroll-strip-date">{strip.publishDate}</span>
+                )}
+              </div>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
