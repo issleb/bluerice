@@ -5,6 +5,7 @@ import Archive from './components/Archive';
 import TagList from './components/TagList';
 import TagDetail from './components/TagDetail';
 import About from './components/About';
+import Foreword from './components/Foreword';
 export default function App() {
   return (
     <div className="app">
@@ -18,6 +19,7 @@ export default function App() {
           <Route path="/tags" element={<TagList />} />
           <Route path="/tag/:name" element={<TagDetail />} />
           <Route path="/about" element={<About />} />
+          <Route path="/foreword" element={<Foreword />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>
