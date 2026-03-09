@@ -383,6 +383,39 @@ img {
   margin-top: 10px;
 }
 
+.essay-list {
+  margin-top: 12px;
+}
+
+.essay-item {
+  padding: 8px 0;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.essay-item:last-child {
+  border-bottom: none;
+}
+
+.essay-item a {
+  font-weight: 600;
+}
+
+.essay-meta {
+  color: #888;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.foreword-byline {
+  text-align: center;
+  color: #666;
+  margin-bottom: 10px;
+}
+
 .about-nav {
   display: flex;
   gap: 20px;

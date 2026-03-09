@@ -46,6 +46,29 @@ export default function About() {
         Shachar's original GIF files, exactly as drawn.
       </p>
 
+      <h3>From the Collections</h3>
+      <p>
+        Blue Rice was collected into three books during its run at the <em>Daily Illini</em>.
+      </p>
+      <div className="essay-list">
+        <div className="essay-item">
+          <Link to="/foreword-1">Foreword to <em>Rice Rice Baby</em></Link>
+          <span className="essay-meta">by Shachar Meron</span>
+        </div>
+        <div className="essay-item">
+          <Link to="/foreword-2">Foreword to <em>Back in Blue</em></Link>
+          <span className="essay-meta">by Matt Hanley</span>
+        </div>
+        <div className="essay-item">
+          <Link to="/foreword-3">Foreword to <em>President Gnomesnail</em></Link>
+          <span className="essay-meta">by Brian Issleb</span>
+        </div>
+        <div className="essay-item">
+          <Link to="/afterword-3">End of the road&hellip;</Link>
+          <span className="essay-meta">Afterword by Shachar Meron</span>
+        </div>
+      </div>
+
       <div className="about-nav">
         <Link to="/strip/1">Start from Strip #1</Link>
         <Link to="/archive">Browse the archive</Link>

@@ -5,7 +5,10 @@ import Archive from './components/Archive';
 import TagList from './components/TagList';
 import TagDetail from './components/TagDetail';
 import About from './components/About';
-import Foreword from './components/Foreword';
+import Foreword3 from './components/Foreword';
+import Foreword1 from './components/Foreword1';
+import Foreword2 from './components/Foreword2';
+import Afterword3 from './components/Afterword3';
 export default function App() {
   return (
     <div className="app">
@@ -19,7 +22,11 @@ export default function App() {
           <Route path="/tags" element={<TagList />} />
           <Route path="/tag/:name" element={<TagDetail />} />
           <Route path="/about" element={<About />} />
-          <Route path="/foreword" element={<Foreword />} />
+          <Route path="/foreword" element={<Foreword3 />} />
+          <Route path="/foreword-1" element={<Foreword1 />} />
+          <Route path="/foreword-2" element={<Foreword2 />} />
+          <Route path="/foreword-3" element={<Foreword3 />} />
+          <Route path="/afterword-3" element={<Afterword3 />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>
